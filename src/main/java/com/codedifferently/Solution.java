@@ -1,8 +1,6 @@
 package com.codedifferently;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Solution {
     /**
@@ -22,14 +20,37 @@ public class Solution {
      * @return
      */
     public Integer[] numberFamily(Integer number, Integer[] possibleFamilyMembers){
-        List<Integer> result = new ArrayList<>();
         Arrays.sort(possibleFamilyMembers);
-        for(int i = 0; i< possibleFamilyMembers.length-1; i++){
-            int current = possibleFamilyMembers[i];
-            int next = possibleFamilyMembers[i+1];
-            if(Math.abs(current - next) < 2 || current == number)
+        List<Integer> family = List.of(possibleFamilyMembers);
+        Set<Integer> result = new TreeSet<>();
+        boolean flag = true;
+        for(int i = family.indexOf(number); i<family.size()-1; i++){
+            int current = family.get(i);
+            int next = family.get(i+1);
+            if(current == number || Math.abs(current-next) < 2)
                 result.add(current);
+            if(Math.abs(current-next) > 1) {
+                flag = false;
+                break;
+            }
         }
+        if(flag)
+            result.add(family.get(family.size()-1));
+        flag = true;
+        for(int i = family.indexOf(number); i>0; i--){
+            int current = family.get(i);
+            int next = family.get(i-1);
+            if(Math.abs(current-next) < 2) {
+                result.add(current);
+                result.add(next);
+            }
+            if(Math.abs(current-next) > 1) {
+                flag = false;
+                break;
+            }
+        }
+        if(flag)
+            result.add(family.get(0));
         return result.toArray(new Integer[0]);
     }
 }
