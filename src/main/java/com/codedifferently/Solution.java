@@ -1,5 +1,9 @@
 package com.codedifferently;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Solution {
     /**
      * You will be given an integer called number and an array called possibleFamilyMembers
@@ -18,6 +22,14 @@ public class Solution {
      * @return
      */
     public Integer[] numberFamily(Integer number, Integer[] possibleFamilyMembers){
-        return null;
+        List<Integer> result = new ArrayList<>();
+        Arrays.sort(possibleFamilyMembers);
+        for(int i = 0; i< possibleFamilyMembers.length-1; i++){
+            int current = possibleFamilyMembers[i];
+            int next = possibleFamilyMembers[i+1];
+            if(Math.abs(current - next) < 2 || current == number)
+                result.add(current);
+        }
+        return result.toArray(new Integer[0]);
     }
 }

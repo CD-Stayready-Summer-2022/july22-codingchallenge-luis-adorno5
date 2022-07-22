@@ -20,6 +20,7 @@ public class SolutionTest {
         Solution solution = new Solution();
         Integer number = 8;
         Integer[] possibleFamilyMembers = new Integer[]{3,7,10,6,8,9,2,1};
+        //1 2 3 6 7 8 9 10
         Integer[] expected = new Integer[]{6,7,8,9,10};
         Integer[]  actual = solution.numberFamily(number, possibleFamilyMembers);
         Assertions.assertArrayEquals(expected,actual);
